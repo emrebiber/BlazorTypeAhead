@@ -1,0 +1,24 @@
+﻿@inject PersonService PersonService
+
+<div class="col-lg-4 col-md-2 col-sm-12">
+    <input type="text" @bind-value="Person.EmailAdress" list="personSearch" class="form-control dark-theme-textbox" placeholder="Search by email adress..." />
+</div>
+
+<datalist id="personSearch">
+    @foreach (var person in People)
+    {
+        <option>@person.EmailAdress</option>
+    }
+</datalist>
+
+@code {
+    private List<Person> People;
+    private Person person;
+
+    [Parameter] public Person Person { get; set; }
+
+    protected override void OnInitialized()
+    {
+        People = PersonService.GetPeople();
+    }
+}
